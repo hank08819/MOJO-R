@@ -1,0 +1,21 @@
+{
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "slug": "rtx6000ada",
+  "arch": "sm_89",
+  "graphics_clock_mhz": 2505,
+  "memory_clock_mhz": 10000,
+  "precision": "fp32",
+  "driver": "535.309.01",
+  "cuda_driver": "12.2",
+  "nvcc": "12.6.85",
+  "mojo": "0.25.6.0",
+  "torch": "2.5.1+cu121",
+  "date": "2026-06-15",
+  "paths": [1000000, 10000000, 100000000],
+  "cuda":    {"median_ms": [0.0074, 0.0153, 0.0938], "std_ms": [0.0008, 0.0012, 0.0045], "price": [10.4561, 10.4517, 10.4502]},
+  "mojo":    {"median_ms": [0.0072, 0.0146, 0.0971], "std_ms": [0.0002, 0.0005, 0.0006], "price": [10.4561, 10.4517, 10.4502]},
+  "pytorch": {"median_ms": [0.0823, 0.2695, 7.9695], "std_ms": [0.0039, 0.0018, 0.0089], "price": [10.4380, 10.4475, 10.4504]},
+  "mojo_tuning_100m_ms": {"baseline": 0.1142, "unroll8": 0.1019, "block64": 0.0971},
+  "mojo_block_size": 64,
+  "mojo_unroll": 8
+}

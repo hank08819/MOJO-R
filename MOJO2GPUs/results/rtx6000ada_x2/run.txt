@@ -1,0 +1,52 @@
+Detected GPU arch: sm_89
+# MOJO2GPUs (two-GPU) manifest
+date_utc:    2026-06-15T19:06:01Z
+host:        (redacted for double-blind review)
+gpu:         NVIDIA RTX 6000 Ada Generation
+gpu_count:   2
+ngpu_used:   2
+driver:      535.309.01
+cuda_driver: 12.2
+nvcc:        Cuda compilation tools, release 12.6, V12.6.85
+gpu_arch:    sm_89
+mojo:        Mojo 0.25.6.0 (06be5aab)
+python:      Python 3.12.7
+torch:       2.5.1+cu121
+
+==========================================
+ Compiling + running CUDA C benchmark (2 GPU) ...
+==========================================
+GPUs detected: 2  -- using 2 GPU(s)
+GPU 0: NVIDIA RTX 6000 Ada Generation
+GPU 1: NVIDIA RTX 6000 Ada Generation
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+     1000000      0.0068        0.0070      0.0003   10.4561
+    10000000      0.0108        0.0109      0.0003   10.4517
+   100000000      0.0496        0.0500      0.0003   10.4502
+
+==========================================
+ Running PyTorch GPU baseline (2 GPU) ...
+==========================================
+<repo>/.venv-torch/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:295: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Device : NVIDIA RTX 6000 Ada Generation x2 (2x data-parallel)
+       Paths     min(ms)    median(ms)     std(ms)     Price
+--------------------------------------------------------------
+   1,000,000      0.0984        0.1019      0.0031   10.3977
+  10,000,000      0.1527        0.1561      0.0025   10.4467
+ 100,000,000      4.0299        4.0423      0.0083   10.4470
+
+==========================================
+ Running Mojo GPU kernel (2 GPU) ...
+==========================================
+Device: GPU 0 + GPU 1 (2x data-parallel)
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+     1000000      0.0080        0.0083      0.0004   10.4561
+    10000000      0.0112        0.0115      0.0010   10.4517
+   100000000      0.0520        0.0526      0.0006   10.4502
+
+Done (2 GPU).

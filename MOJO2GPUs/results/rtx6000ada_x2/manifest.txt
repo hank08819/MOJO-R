@@ -1,0 +1,13 @@
+# MOJO2GPUs (two-GPU) manifest
+date_utc:    2026-06-15T19:06:01Z
+host:        (redacted for double-blind review)
+gpu:         NVIDIA RTX 6000 Ada Generation
+gpu_count:   2
+ngpu_used:   2
+driver:      535.309.01
+cuda_driver: 12.2
+nvcc:        Cuda compilation tools, release 12.6, V12.6.85
+gpu_arch:    sm_89
+mojo:        Mojo 0.25.6.0 (06be5aab)
+python:      Python 3.12.7
+torch:       2.5.1+cu121

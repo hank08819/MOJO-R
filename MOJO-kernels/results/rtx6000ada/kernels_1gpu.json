@@ -1,0 +1,23 @@
+{
+  "gpu": "NVIDIA RTX 6000 Ada Generation", "arch": "sm_89", "ngpu": 1, "clock_mhz": 2505,
+  "european": {"paths": [1e6,1e7,1e8],
+    "cuda":   {"median_ms":[0.0074,0.0153,0.0938], "std_ms":[0.0008,0.0012,0.0045], "value":10.4502},
+    "mojo":   {"median_ms":[0.0072,0.0146,0.0971], "std_ms":[0.0002,0.0005,0.0006], "value":10.4502},
+    "pytorch":{"median_ms":[0.0823,0.2695,7.9695], "std_ms":[0.0039,0.0018,0.0089], "value":10.4504}},
+  "asian": {"paths": [1e5,1e6,1e7], "m_steps":100,
+    "cuda":   {"median_ms":[0.0141,0.0838,0.7951], "std_ms":[0.0011,0.0006,0.0334], "value":5.8096},
+    "mojo":   {"median_ms":[0.0136,0.0862,0.8250], "std_ms":[0.0002,0.0003,0.0344], "value":5.8096},
+    "pytorch":{"median_ms":[2.3506,2.2792,34.8709],"std_ms":[0.1645,0.0838,0.0283], "value":5.8095}},
+  "mlp": {"samples": [1e6,1e7,1e8], "dims":"16-64-1",
+    "cuda":   {"median_ms":[0.2246,2.2057,22.1852], "std_ms":[0.0008,0.0111,0.1129], "value":0.295821},
+    "mojo":   {"median_ms":[0.2354,2.3205,23.3836], "std_ms":[0.0007,0.0253,0.1246], "value":0.295821},
+    "pytorch":{"median_ms":[2.2181,23.5192,235.2548],"std_ms":[0.0344,0.0600,0.0729], "value":0.143386}},
+  "american": {"options": [1e4,1e5,1e6], "method":"CRR binomial tree, STEPS=128",
+    "cuda":   {"median_ms":[0.1734,0.3447,3.8932],   "std_ms":[0.0002,0.0014,0.0275], "value":7.62378},
+    "mojo":   {"median_ms":[0.4285,1.9112,20.3259],  "std_ms":[0.0004,0.1912,0.9751], "value":7.62378},
+    "pytorch":{"median_ms":[7.8272,49.5322,759.1867],"std_ms":[0.3328,0.0291,0.1558], "value":7.62280}},
+  "bermudan": {"paths": [1e6,4e6,1.6e7], "method":"d=5 LSM optimal-stopping inference, policy trained in PyTorch",
+    "cuda":   {"median_ms":[0.0501,0.1883,0.7296],   "std_ms":[0.001,0.002,0.005], "value":26.3906},
+    "mojo":   {"median_ms":[0.0951,0.3681,1.4644],   "std_ms":[0.002,0.005,0.010], "value":26.3906},
+    "pytorch":{"median_ms":[4.1627,30.1758,140.366], "std_ms":[0.05,0.10,0.30],    "value":26.3945}}
+}

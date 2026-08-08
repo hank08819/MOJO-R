@@ -1,0 +1,15 @@
+PENDING -- no run on this GPU yet.
+
+This slot is reserved for the NVIDIA H100 (compute capability 9.0, sm_90).
+
+To fill it in, run the benchmark on a host with this GPU:
+
+    bash scripts/run_benchmark.sh
+
+The script auto-detects the GPU, picks the matching nvcc arch (sm_90), and
+writes manifest.txt / run.txt / timings.json into this folder
+(results/h100/). Then delete this PENDING.txt.
+
+Before running, consider the per-GPU Mojo kernel tuning knobs documented in
+tuning/gpu_profiles.md (block size and unroll factor); the defaults are tuned
+for the RTX 6000 Ada (sm_89) and may not be optimal here.

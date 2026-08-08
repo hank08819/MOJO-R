@@ -1,0 +1,50 @@
+Detected GPU arch: sm_89
+# mojo-gpu-finance reproducibility manifest
+date_utc:    2026-06-15T06:24:53Z
+host:        (redacted for double-blind review)
+gpu:         NVIDIA RTX 6000 Ada Generation
+gpu_count:   2
+driver:      535.309.01
+cuda_driver: 12.2
+nvcc:        Cuda compilation tools, release 12.6, V12.6.85
+gpu_arch:    sm_89
+mojo:        Mojo 0.25.6.0 (06be5aab)
+python:      Python 3.12.7
+torch:       2.5.1+cu121
+
+
+==========================================
+ Compiling CUDA C reference kernel ...
+==========================================
+ Running CUDA C benchmark ...
+GPUs detected: 2  -- using GPU 0 only
+GPU 0: NVIDIA RTX 6000 Ada Generation
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+     1000000      0.0071        0.0074      0.0008   10.4561
+    10000000      0.0149        0.0153      0.0012   10.4517
+   100000000      0.0932        0.0938      0.0045   10.4502
+
+==========================================
+ Running PyTorch GPU baseline ...
+==========================================
+Device : NVIDIA RTX 6000 Ada Generation
+       Paths     min(ms)    median(ms)     std(ms)     Price
+--------------------------------------------------------------
+   1,000,000      0.0730        0.0823      0.0039   10.4380
+  10,000,000      0.2670        0.2695      0.0018   10.4475
+ 100,000,000      7.9470        7.9695      0.0089   10.4504
+
+==========================================
+ Running Mojo GPU kernel ...
+==========================================
+Device: GPU 0
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+     1000000      0.0069        0.0072      0.0002   10.4561
+    10000000      0.0143        0.0146      0.0005   10.4517
+   100000000      0.0967        0.0971      0.0006   10.4502
+
+Done. Copy the numbers into Table 2 of the paper.
