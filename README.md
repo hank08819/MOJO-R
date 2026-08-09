@@ -1,4 +1,4 @@
-# Closing the Mojo GPU Gap in Financial AI — reproducibility artifact
+# Closing the Mojo GPU Gap in Financial AI
 
 Code, run logs, and figure scripts for a precision matched, three way comparison of
 **Mojo**, **hand written CUDA C**, and **idiomatic PyTorch** on five financial GPU
