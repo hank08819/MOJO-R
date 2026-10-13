@@ -9,12 +9,12 @@
  *   * device buffers allocated once, before the timed region
  *   * timed region = the MC compute kernel; the tiny 262,144-element finish that
  *     produces the price is done once, outside timing
- *   * 5 warmup launches, then the average of 20 timed launches
+ *   * 5 warmup launches, then min / median / std over 50 timed launches
  *
  * Compile:
- *   nvcc -O3 -arch=sm_89 mc_cuda.cu -o mc_cuda    # RTX 6000 Ada / 4090 (sm_89)
- *   nvcc -O3 -arch=sm_90 mc_cuda.cu -o mc_cuda    # H100 (sm_90)
- *   nvcc -O3 -arch=sm_80 mc_cuda.cu -o mc_cuda    # A100 (sm_80)
+ *   nvcc -O3 -arch=sm_89 -use_fast_math mc_cuda.cu -o mc_cuda    # RTX 6000 Ada / 4090 (sm_89)
+ *   nvcc -O3 -arch=sm_90 -use_fast_math mc_cuda.cu -o mc_cuda    # H100 (sm_90)
+ *   nvcc -O3 -arch=sm_80 -use_fast_math mc_cuda.cu -o mc_cuda    # A100 (sm_80)
  *
  * Run:
  *   ./mc_cuda

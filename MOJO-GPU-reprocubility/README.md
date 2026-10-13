@@ -5,7 +5,8 @@ Three implementations of the same Black-Scholes Monte Carlo option pricer
 under a documented reproducibility protocol.
 
 **Purpose:** Produce the GPU timing results and figures for the paper
-"Closing the Mojo GPU Gap in Financial AI." The harness is
+"Closing the Productivity and Performance Gap in Financial AI: A Reproducible
+Evaluation of Mojo against CUDA and PyTorch on the GPU." The harness is
 **multi-GPU ready**: results are stored per GPU type, so the same protocol can be
 re-run on an H100, A100, RTX 4090, etc. without overwriting earlier runs.
 
@@ -238,6 +239,20 @@ The NVIDIA driver is too old (CUDA 12.2) for Mojo >= 0.26. This repo pins Mojo
 The GPU API names are version-specific. This code targets **Mojo 0.25.6.0**:
 `DeviceContext(device_id=0)`, `enqueue_function[kernel](...)`,
 `enqueue_create_buffer`, `enqueue_create_host_buffer`.
+
+---
+
+## What to put in the paper
+
+Once you have the numbers, update the paper as follows:
+
+1. **Table 2** (new): copy the timing rows for 1M / 10M / 100M paths.
+2. **Figure 3 panel (a)** caption: change "projected" to "measured on [GPU model]."
+3. **Section 5**: add one paragraph: "Table 2 reports direct GPU measurements
+   on an NVIDIA [model]. Mojo GPU reached X× the throughput of PyTorch and
+   was within Y% of hand-written CUDA C."
+4. **Limitations**: remove the sentence "We did not benchmark Mojo's GPU
+   path end-to-end against CUDA on dedicated NVIDIA hardware."
 
 ---
 
