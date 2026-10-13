@@ -1,6 +1,6 @@
-# NAVIDMOJO reproducibility manifest
+# mojo-gpu-finance reproducibility manifest
 date_utc:    2026-06-15T06:24:53Z
-host:        drhh-resh04
+host:        (redacted for double-blind review)
 gpu:         NVIDIA RTX 6000 Ada Generation
 gpu_count:   2
 driver:      535.309.01
