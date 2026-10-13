@@ -2,7 +2,9 @@
 import torch, numpy as np, time
 dev="cuda"; K,r,div,sig,T,N,d=100.,0.05,0.10,0.2,3.0,9,5
 dt=T/N; DISC=float(np.exp(-r*dt)); drift=(r-div-0.5*sig*sig)*dt; vol=sig*dt**0.5
-B=torch.tensor(np.load("MojoGPU2026_V3/results/policy_beta.npy"),device=dev,dtype=torch.float32) #(7,13)
+import os
+POLICY=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","results","rtx6000ada","policy_beta.npy")
+B=torch.tensor(np.load(POLICY),device=dev,dtype=torch.float32) #(7,13)
 def basis(S):
     m=S/K; mx=m.max(-1,keepdim=True).values
     return torch.cat([torch.ones(S.shape[0],1,device=dev),m,m*m,mx,mx*mx],1)

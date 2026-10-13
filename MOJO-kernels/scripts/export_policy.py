@@ -32,7 +32,10 @@ price=(C*DISC**td).mean().item()
 print(f"d={d} S0={S0}: OOS LSM price = {price:.4f}  (ref 26.156)")
 B=np.stack([betas[n].cpu().numpy() for n in range(1,N-1)])  # (7,13)
 print("DATES_USED = 1..7 ; NB=13 ; DISC=%.8f ; drift=%.8f ; vol=%.8f"%(DISC,(r-div-0.5*sig*sig)*dt,sig*dt**0.5))
-np.save("MojoGPU2026_V3/results/policy_beta.npy",B)
+import os
+POLICY=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","results","rtx6000ada","policy_beta.npy")
+os.makedirs(os.path.dirname(POLICY),exist_ok=True)
+np.save(POLICY,B)
 # print as Mojo/C flat literal
 flat=B.flatten()
 print("BETA = [")

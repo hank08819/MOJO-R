@@ -1,6 +1,6 @@
 [workspace]
 channels = ["https://conda.modular.com/max", "conda-forge"]
-name = "mojo-gpu-finance"
+name = "NAVIDMOJO"
 platforms = ["linux-64"]
 version = "0.1.0"
 
