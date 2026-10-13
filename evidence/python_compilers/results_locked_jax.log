@@ -1,0 +1,39 @@
+date_utc: 2026-10-13T05:54:55Z
+name, driver_version, clocks.current.graphics [MHz]
+NVIDIA RTX 6000 Ada Generation, 580.178.04, 2505 MHz
+jax 0.10.2 jaxlib 0.10.2
+### CUDA C (anchor)
+GPUs detected: 1  -- using GPU 0 only
+GPU 0: NVIDIA RTX 6000 Ada Generation
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+PRICEHEX 1000000 0x1.4e982628a5a67p+3
+     1000000      0.0057        0.0059      0.0026   10.4561
+PRICEHEX 10000000 0x1.4e742254d7fe6p+3
+    10000000      0.0136        0.0138      0.0002   10.4517
+PRICEHEX 100000000 0x1.4e67dce7aed06p+3
+   100000000      0.0914        0.0923      0.0004   10.4502
+### Mojo (anchor)
+Device: GPU 0
+
+       Paths     min(ms)    median(ms)     std(ms)     Price
+------------------------------------------------------------
+     1000000      0.0068        0.0070      0.0002   10.4561
+    10000000      0.0141        0.0143      0.0003   10.4517
+   100000000      0.0966        0.0969      0.0003   10.4502
+### JAX vec
+jax vec n=  1,000,000 median 0.0465 ms  std 0.0042  price 10.4560748232 0x1.4e982a3a41d54p+3  batched-median 0.0250
+jax vec n= 10,000,000 median 0.1068 ms  std 0.0055  price 10.4516783534 0x1.4e74262982b05p+3  batched-median 0.0540
+jax vec n=100,000,000 median 0.2983 ms  std 0.0101  price 10.4501804137 0x1.4e67e0c14b645p+3  batched-median 0.2793
+### JAX loop
+jax loop n=  1,000,000 median 0.0732 ms  std 0.0053  price 10.4560748232 0x1.4e982a3a41d54p+3  batched-median 0.0401
+jax loop n= 10,000,000 median 0.2200 ms  std 0.0051  price 10.4516783554 0x1.4e74262a95a01p+3  batched-median 0.1616
+jax loop n=100,000,000 median 1.5801 ms  std 0.2345  price 10.4501804150 0x1.4e67e0c1fb37ap+3  batched-median 1.5300
+### run-to-run repeat
+jax vec n=  1,000,000 median 0.0691 ms  std 0.0086  price 10.4560748232 0x1.4e982a3a41d54p+3  batched-median 0.0206
+jax vec n= 10,000,000 median 0.1198 ms  std 0.0071  price 10.4516783534 0x1.4e74262982b05p+3  batched-median 0.0544
+jax vec n=100,000,000 median 0.3087 ms  std 0.0044  price 10.4501804137 0x1.4e67e0c14b645p+3  batched-median 0.2915
+clocks.current.graphics [MHz]
+2055 MHz
+DONE
