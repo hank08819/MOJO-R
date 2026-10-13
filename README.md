@@ -18,6 +18,7 @@ without overwriting earlier runs.
 | [`MOJO-GPU-reprocubility/`](MOJO-GPU-reprocubility/) | European Monte Carlo pricer on **one** GPU: the core three way comparison at 1M / 10M / 100M paths, plus the kernel tuning sweep. |
 | [`MOJO-kernels/`](MOJO-kernels/) | The **four additional workloads**: Asian (path dependent MC), American (binomial tree), MLP inference, Bermudan (trained policy inference). |
 | [`MOJO2GPUs/`](MOJO2GPUs/) | The **two GPU** data parallel study and the timing reproducibility index. |
+| [`evidence/`](evidence/) | Camera-ready evidence: bit-level CUDA C vs Mojo checks for all five kernels, and the Numba, Triton, and JAX runs behind Table 4. See [`evidence/README.md`](evidence/README.md). |
 
 Each package is self contained with the same shape:
 
@@ -39,6 +40,7 @@ Each package is self contained with the same shape:
 | **Table 1** | Single GPU MC timing, 1M/10M/100M | `MOJO-GPU-reprocubility/results/rtx6000ada/timings.json` |
 | **Table 2** | Two GPU timing and parallel speedup | `MOJO2GPUs/results/rtx6000ada_x2/timings.json` |
 | **Table 3** | All five workloads | `MOJO-kernels/results/rtx6000ada/kernels_1gpu.json` |
+| **Table 4** | European kernel vs Numba, Triton, JAX | `evidence/python_compilers/summary_locked.json` (JAX: `raw_jax/`, `results_locked_jax.log`) |
 | **Figure 1** | Mojo vs CUDA source listing | `MOJO-GPU-reprocubility/src/mc_mojo.mojo`, `src/mc_cuda.cu` |
 | **Figure 2** | Runtime, speedup, throughput | `MOJO-GPU-reprocubility/scripts/gen_plots.py` |
 | **Figure 3** | Kernel tuning toward CUDA parity | `MOJO-GPU-reprocubility/scripts/gen_plots.py` (tuning panel) |
@@ -103,8 +105,9 @@ functions, which is what makes the CUDA and Mojo results comparable at the bit l
 **Numerics.** Randomness is *index addressed*: the draw for path `i` is a pure
 function of `(i, seed)`, independent of how the GPU schedules threads. The reduction
 uses a *fixed grid stride order* over `M = 2^18` resident threads. Together these make
-the price bitwise reproducible run to run, and make the CUDA and Mojo prices bitwise
-identical to each other. Correctness is anchored to the closed form Black Scholes
+the price bitwise reproducible run to run. The CUDA and Mojo prices agree to within
+1e-9 relative on the European kernel (bitwise at 1e6 paths) and to within 5e-7 on all
+five kernels; the bit-level evidence is in [`evidence/bitcheck/`](evidence/bitcheck/). Correctness is anchored to the closed form Black Scholes
 price, `c ≈ 10.45` for `S=K=100, r=0.05, σ=0.20, T=1`.
 
 **Measurement.** Graphics clock locked at 2505 MHz (memory 10000 MHz) to remove boost
@@ -130,8 +133,8 @@ Median of 50 launches, milliseconds, at the largest size of each kernel.
 | MLP inference | 1e8 samples | 22.185 | 23.384 | 235.255 | 1.05x | 10x |
 | Bermudan (policy) | 1.6e7 paths | 0.7296 | 1.4644 | 140.366 | 2.01x | 96x |
 
-CUDA C and Mojo run numerically identical algorithms and return **bitwise identical**
-results. Mojo matches hand written CUDA on the three streaming kernels and trails on
+CUDA C and Mojo run the same algorithm, and their results agree to within 5e-7
+relative (see [`evidence/`](evidence/)). Mojo matches hand written CUDA on the three streaming kernels and trails on
 the two stateful ones (American, Bermudan), while beating PyTorch throughout.
 
 The PyTorch baseline is deliberately **idiomatic and eager mode**: the vectorized code
