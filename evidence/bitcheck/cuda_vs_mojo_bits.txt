@@ -1,0 +1,25 @@
+# CUDA C vs Mojo, bit-level comparison of every per-thread partial sum and the final price.
+# RTX 6000 Ada, driver 580.178.04, nvcc 12.6 -O3 -use_fast_math, Mojo 0.25.6.0, 2026-10-12.
+# Price = sequential double-precision sum of the float32 partials, divided by n (as in the benchmark programs).
+kernel         n          partials differing     CUDA price (hex)         Mojo price (hex)         identical rel. diff
+american       10000      7113/131072            0x1.db5af41cdd2f2p+2     0x1.db5af433afb7fp+2     False     2.9e-09
+american       100000     71528/131072           0x1.e4fc80939cb68p+2     0x1.e4fc80b00e172p+2     False     3.5e-09
+american       1000000    64652/131072           0x1.e7ebfb1d60631p+2     0x1.e7ebfb3808851p+2     False     3.3e-09
+asian          100000     51131/262144           0x1.74ec1b99bfdd0p+2     0x1.74ec21345b3d0p+2     False     2.3e-07
+asian          1000000    231589/262144          0x1.743b01b3c1068p+2     0x1.743b0735e79fap+2     False     2.3e-07
+asian          10000000   243000/262144          0x1.73d0db0149914p+2     0x1.73d0e086fbed5p+2     False     2.3e-07
+bermudan       1000000    112223/262144          0x1.a6612f8f2ad65p+4     0x1.a6612313d2e52p+4     False     4.5e-07
+bermudan       4000000    103255/262144          0x1.a63dc25d2d235p+4     0x1.a63dc9b6efa1ep+4     False     2.7e-07
+bermudan       16000000   103703/262144          0x1.a640092b24639p+4     0x1.a6400f66fc159p+4     False     2.3e-07
+european       1000000    0/262144               0x1.4e982628a5a67p+3     0x1.4e982628a5a67p+3     True      0.0e+00
+european       10000000   155605/262144          0x1.4e742254d7fe6p+3     0x1.4e742253c6bc1p+3     False     1.9e-10
+european       100000000  223666/262144          0x1.4e67dce7aed06p+3     0x1.4e67dce809135p+3     False     6.3e-11
+european2gpu   1000000    0/524288               0x1.4e982628569d3p+3     0x1.4e982628569d3p+3     True      0.0e+00
+european2gpu   10000000   256127/524288          0x1.4e7422546101ap+3     0x1.4e7422538c61ap+3     False     1.5e-10
+european2gpu   100000000  413144/524288          0x1.4e67dce90da02p+3     0x1.4e67dce8d4c03p+3     False     4.0e-11
+mlp            1000000    239393/262144          0x1.2e98a6e944135p-2     0x1.2e98a777a6699p-2     False     2.8e-08
+mlp            10000000   244138/262144          0x1.2efbb4cdb4982p-2     0x1.2efbb5591edb2p-2     False     2.7e-08
+mlp            100000000  237463/262144          0x1.2eebc6762aff9p-2     0x1.2eebc6fd5906bp-2     False     2.7e-08
+two GPUs vs one GPU, n=1000000: CUDA identical=False (abs. diff -5.751e-10), Mojo identical=False (abs. diff -5.751e-10)
+two GPUs vs one GPU, n=10000000: CUDA identical=False (abs. diff -8.657e-10), Mojo identical=False (abs. diff -4.246e-10)
+two GPUs vs one GPU, n=100000000: CUDA identical=False (abs. diff +2.552e-09), Mojo identical=False (abs. diff +1.482e-09)
